@@ -9,7 +9,7 @@ import (
 func init() {
 	logConfig := xlog.Config{
 		Debug: true,
-		Async: true,
+		Async: false,
 		EncoderConfig: &zapcore.EncoderConfig{
 			TimeKey:       "ts",
 			LevelKey:      "lv",
