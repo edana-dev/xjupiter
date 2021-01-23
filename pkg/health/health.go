@@ -35,7 +35,7 @@ func Init() {
 
 		body, _ := json.Marshal(&rets)
 		if status == StatusDown {
-			w.WriteHeader(http.StatusInternalServerError)
+			w.WriteHeader(http.StatusServiceUnavailable)
 		}
 		w.Write(body)
 
