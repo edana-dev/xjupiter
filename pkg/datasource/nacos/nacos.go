@@ -48,7 +48,8 @@ func (n *nacosDataSource) start() error {
 		DataId: n.dataId,
 		Group:  n.group,
 		OnChange: func(namespace, group, dataId, data string) {
-			xlog.Info("config changed group:" + group + ", dataId:" + dataId + ", content:" + data)
+			xlog.Info("nacos config changed")
+			xlog.Debugf("config changed group: %s, dataId: %s, content: \n%s", group, dataId, data)
 			// notify config arch that config change, and will get config again?
 			n.changed <- struct{}{}
 		},
