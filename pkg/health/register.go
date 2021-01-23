@@ -10,7 +10,7 @@ import (
 
 var (
 	RegisterMap = make(map[string]Checker)
-	lock        sync.RWMutex
+	lock        sync.Mutex
 )
 
 type Checker func() (bool, map[string]interface{})
