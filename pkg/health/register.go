@@ -43,10 +43,18 @@ func RegisterRedis(redisClient redis.Cmdable) {
 const CheckSQL = "select 1"
 
 func RegisterDB(db *sql.DB) {
-	Register("redis", func() (bool, map[string]interface{}) {
-		_, err := db.Query(CheckSQL)
+	RegisterDBWithName(db, "db")
+}
+
+func RegisterDBWithName(db *sql.DB, name string) {
+	RegisterDBWithNameAndCheckSQL(db, name, CheckSQL)
+}
+
+func RegisterDBWithNameAndCheckSQL(db *sql.DB, name string, checkSQL string) {
+	Register(name, func() (bool, map[string]interface{}) {
+		_, err := db.Query(checkSQL)
 		attrs := make(map[string]interface{})
-		attrs["sql"] = CheckSQL
+		attrs["sql"] = checkSQL
 		if err != nil {
 			attrs["err"] = err.Error()
 		}
